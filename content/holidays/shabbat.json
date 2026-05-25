@@ -1,0 +1,13 @@
+{
+  "id": "shabbat",
+  "slug": "shabbat",
+  "category": "holiday",
+  "order": 1,
+  "name": { "en": "Shabbat", "he": "שַׁבָּת", "nl": "Sjabbat" },
+  "description": {
+    "en": "The weekly day of rest, observed from Friday sundown to Saturday night.",
+    "he": "",
+    "nl": ""
+  },
+  "customs": []
+}

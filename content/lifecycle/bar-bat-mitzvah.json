@@ -1,0 +1,13 @@
+{
+  "id": "bar-bat-mitzvah",
+  "slug": "bar-bat-mitzvah",
+  "category": "lifecycle",
+  "order": 2,
+  "name": { "en": "Bar & Bat Mitzvah", "he": "בַּר וּבַת מִצְוָה", "nl": "Bar & Bat Mitswa" },
+  "description": {
+    "en": "The coming-of-age ceremony marking a child's entry into Jewish adulthood and responsibility.",
+    "he": "",
+    "nl": ""
+  },
+  "customs": []
+}

@@ -1,0 +1,27 @@
+{
+  "nav": {
+    "home": "Home",
+    "holidays": "Holidays",
+    "lifecycle": "Lifecycle Events"
+  },
+  "home": {
+    "title": "Eisenmann Family Minhagim",
+    "subtitle": "The customs and traditions of our family",
+    "description": "We are a Yekke family — Jews whose roots trace to the Netherlands and the German-Jewish tradition. This site preserves the minhagim (customs) unique to our family: how we pray, what we sing, and how we mark the moments of Jewish life.",
+    "holidays_heading": "Holidays",
+    "lifecycle_heading": "Lifecycle Events",
+    "no_customs": "No customs recorded yet.",
+    "customs_count_one": "{{count}} custom",
+    "customs_count_other": "{{count}} customs"
+  },
+  "entry": {
+    "no_customs_heading": "No customs recorded yet",
+    "no_customs_body": "Customs for this occasion will be added as they are collected from family members.",
+    "recorded_by": "Recorded by",
+    "listen": "Listen",
+    "download": "Download"
+  },
+  "footer": {
+    "tagline": "Preserving the Eisenmann family minhagim for generations to come."
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "id": "sukkot",
+  "slug": "sukkot",
+  "category": "holiday",
+  "order": 4,
+  "name": { "en": "Sukkot", "he": "סֻכּוֹת", "nl": "Soekot" },
+  "description": {
+    "en": "The Festival of Booths, observed for seven days beginning on the 15th of Tishrei.",
+    "he": "",
+    "nl": ""
+  },
+  "customs": []
+}

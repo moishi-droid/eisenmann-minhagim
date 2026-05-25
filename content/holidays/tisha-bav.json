@@ -1,0 +1,13 @@
+{
+  "id": "tisha-bav",
+  "slug": "tisha-bav",
+  "category": "holiday",
+  "order": 11,
+  "name": { "en": "Tisha B'Av & Fast Days", "he": "תִּשְׁעָה בְּאָב וְצוֹמוֹת", "nl": "Tiesja BeAv & Vastendagen" },
+  "description": {
+    "en": "The major fast commemorating the destruction of the Temple, and other fast days throughout the year.",
+    "he": "",
+    "nl": ""
+  },
+  "customs": []
+}

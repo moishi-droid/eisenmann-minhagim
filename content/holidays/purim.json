@@ -1,0 +1,13 @@
+{
+  "id": "purim",
+  "slug": "purim",
+  "category": "holiday",
+  "order": 7,
+  "name": { "en": "Purim", "he": "פּוּרִים", "nl": "Poeriem" },
+  "description": {
+    "en": "The festival commemorating the salvation of the Jewish people in ancient Persia.",
+    "he": "",
+    "nl": ""
+  },
+  "customs": []
+}

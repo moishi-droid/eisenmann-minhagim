@@ -1,0 +1,13 @@
+{
+  "id": "rosh-chodesh",
+  "slug": "rosh-chodesh",
+  "category": "holiday",
+  "order": 12,
+  "name": { "en": "Rosh Chodesh", "he": "רֹאשׁ חֹדֶשׁ", "nl": "Rosj Chodesj" },
+  "description": {
+    "en": "The new month, observed with special prayers and readings.",
+    "he": "",
+    "nl": ""
+  },
+  "customs": []
+}

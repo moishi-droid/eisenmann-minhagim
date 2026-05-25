@@ -1,0 +1,13 @@
+{
+  "id": "shavuot",
+  "slug": "shavuot",
+  "category": "holiday",
+  "order": 10,
+  "name": { "en": "Shavuot", "he": "שָׁבוּעוֹת", "nl": "Sjavoeot" },
+  "description": {
+    "en": "The Festival of Weeks, commemorating the giving of the Torah at Mount Sinai.",
+    "he": "",
+    "nl": ""
+  },
+  "customs": []
+}

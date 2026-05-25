@@ -1,0 +1,13 @@
+{
+  "id": "birth",
+  "slug": "birth",
+  "category": "lifecycle",
+  "order": 1,
+  "name": { "en": "Birth & Naming", "he": "לֵדָה וּמַתַּן שֵׁם", "nl": "Geboorte & Naamgeving" },
+  "description": {
+    "en": "Customs surrounding the birth of a child and the giving of a Jewish name.",
+    "he": "",
+    "nl": ""
+  },
+  "customs": []
+}

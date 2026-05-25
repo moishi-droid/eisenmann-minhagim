@@ -1,0 +1,13 @@
+{
+  "id": "rosh-hashana",
+  "slug": "rosh-hashana",
+  "category": "holiday",
+  "order": 2,
+  "name": { "en": "Rosh Hashana", "he": "רֹאשׁ הַשָּׁנָה", "nl": "Rosj Hasjana" },
+  "description": {
+    "en": "The Jewish New Year, observed on the 1st and 2nd of Tishrei.",
+    "he": "",
+    "nl": ""
+  },
+  "customs": []
+}

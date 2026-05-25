@@ -1,0 +1,13 @@
+{
+  "id": "yom-kippur",
+  "slug": "yom-kippur",
+  "category": "holiday",
+  "order": 3,
+  "name": { "en": "Yom Kippur", "he": "יוֹם כִּפּוּר", "nl": "Jom Kipoer" },
+  "description": {
+    "en": "The Day of Atonement, the holiest day of the Jewish year.",
+    "he": "",
+    "nl": ""
+  },
+  "customs": []
+}

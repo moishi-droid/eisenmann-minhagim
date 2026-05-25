@@ -1,0 +1,13 @@
+{
+  "id": "chanukah",
+  "slug": "chanukah",
+  "category": "holiday",
+  "order": 6,
+  "name": { "en": "Chanukah", "he": "חֲנֻכָּה", "nl": "Chanoeka" },
+  "description": {
+    "en": "The Festival of Lights, celebrated for eight nights beginning on the 25th of Kislev.",
+    "he": "",
+    "nl": ""
+  },
+  "customs": []
+}

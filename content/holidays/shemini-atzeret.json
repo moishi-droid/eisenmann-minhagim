@@ -1,0 +1,13 @@
+{
+  "id": "shemini-atzeret",
+  "slug": "shemini-atzeret",
+  "category": "holiday",
+  "order": 5,
+  "name": { "en": "Shemini Atzeret & Simchat Torah", "he": "שְׁמִינִי עֲצֶרֶת וְשִׂמְחַת תּוֹרָה", "nl": "Sjeméni Atséret & Simchat Tora" },
+  "description": {
+    "en": "The eighth day of assembly following Sukkot, and the celebration of completing the Torah cycle.",
+    "he": "",
+    "nl": ""
+  },
+  "customs": []
+}

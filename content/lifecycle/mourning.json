@@ -1,0 +1,13 @@
+{
+  "id": "mourning",
+  "slug": "mourning",
+  "category": "lifecycle",
+  "order": 4,
+  "name": { "en": "Mourning & Funeral", "he": "אֲבֵלוּת וּלְוָיָה", "nl": "Rouw & Begrafenis" },
+  "description": {
+    "en": "Customs observed during mourning, at funerals, and throughout the shiva and shloshim periods.",
+    "he": "",
+    "nl": ""
+  },
+  "customs": []
+}

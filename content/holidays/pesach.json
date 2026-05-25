@@ -1,0 +1,13 @@
+{
+  "id": "pesach",
+  "slug": "pesach",
+  "category": "holiday",
+  "order": 8,
+  "name": { "en": "Pesach", "he": "פֶּסַח", "nl": "Pesach" },
+  "description": {
+    "en": "Passover, the festival commemorating the Exodus from Egypt.",
+    "he": "",
+    "nl": ""
+  },
+  "customs": []
+}

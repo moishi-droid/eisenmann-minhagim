@@ -1,0 +1,13 @@
+{
+  "id": "wedding",
+  "slug": "wedding",
+  "category": "lifecycle",
+  "order": 3,
+  "name": { "en": "Wedding", "he": "חֲתֻנָּה", "nl": "Bruiloft" },
+  "description": {
+    "en": "Customs and traditions surrounding a Jewish wedding ceremony.",
+    "he": "",
+    "nl": ""
+  },
+  "customs": []
+}

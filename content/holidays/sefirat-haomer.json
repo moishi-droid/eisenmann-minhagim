@@ -1,0 +1,13 @@
+{
+  "id": "sefirat-haomer",
+  "slug": "sefirat-haomer",
+  "category": "holiday",
+  "order": 9,
+  "name": { "en": "Sefirat HaOmer", "he": "סְפִירַת הָעֹמֶר", "nl": "Sefirat HaOmer" },
+  "description": {
+    "en": "The 49-day counting period between Pesach and Shavuot.",
+    "he": "",
+    "nl": ""
+  },
+  "customs": []
+}
