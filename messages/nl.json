@@ -11,13 +11,13 @@
     "description": "Wij zijn een Jeckische familie — Joden met wortels in Nederland en de Duits-Joodse traditie. Deze site bewaart de minhagim die uniek zijn voor onze familie.",
     "holidays_heading": "Feestdagen",
     "lifecycle_heading": "Levenscyclus",
-    "no_customs": "Nog geen gebruiken vastgelegd.",
+    "no_customs": "Nog niet vastgelegd.",
     "customs_count_one": "{{count}} gebruik",
     "customs_count_other": "{{count}} gebruiken"
   },
   "entry": {
-    "no_customs_heading": "Nog geen gebruiken vastgelegd",
-    "no_customs_body": "Gebruiken voor deze gelegenheid worden toegevoegd zodra ze zijn verzameld van familieleden.",
+    "no_customs_heading": "Nog niet vastgelegd",
+    "no_customs_body": "Weet jij nog hoe dit gedaan werd? Deel het met de familie.",
     "recorded_by": "Opgenomen door",
     "listen": "Luisteren",
     "download": "Downloaden"

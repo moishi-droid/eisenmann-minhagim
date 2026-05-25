@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { hasLocale, getDictionary, type Locale } from "@/lib/dictionaries";
-import { getEntry, getAllEntries } from "@/lib/content";
+import { getEntry, getAllEntries, getAdjacentEntries } from "@/lib/content";
 import AudioPlayer from "@/components/AudioPlayer";
 
 export async function generateStaticParams() {
@@ -44,6 +44,7 @@ export default async function EntryPage({ params }: PageProps<"/[lang]/[slug]">)
   const categoryLabel = entry.category === "holiday" ? dict.nav.holidays : dict.nav.lifecycle;
   const name = entry.name[locale] || entry.name.en;
   const description = entry.description[locale] || entry.description.en;
+  const { prev, next } = getAdjacentEntries(slug, entry.category);
 
   return (
     <div className="max-w-[680px] mx-auto px-6 py-10">
@@ -121,6 +122,44 @@ export default async function EntryPage({ params }: PageProps<"/[lang]/[slug]">)
           )}
         </div>
       </div>
+      {/* Adjacent navigation */}
+      {(prev || next) && (
+        <nav
+          aria-label="Navigate between entries"
+          className="flex items-center justify-between gap-4 pt-2 border-t border-rule"
+        >
+          <div className="flex-1">
+            {prev && (
+              <Link
+                href={`/${lang}/${prev.slug}`}
+                className="group flex flex-col gap-0.5 text-left"
+              >
+                <span className="text-[0.62rem] font-semibold tracking-[0.1em] uppercase text-ink-light group-hover:text-ink-soft transition-colors">
+                  {lang === "he" ? "→" : "←"} Previous
+                </span>
+                <span className="font-serif text-[0.92rem] text-ink group-hover:text-orange transition-colors">
+                  {prev.name[locale] || prev.name.en}
+                </span>
+              </Link>
+            )}
+          </div>
+          <div className="flex-1 text-right">
+            {next && (
+              <Link
+                href={`/${lang}/${next.slug}`}
+                className="group flex flex-col gap-0.5 items-end"
+              >
+                <span className="text-[0.62rem] font-semibold tracking-[0.1em] uppercase text-ink-light group-hover:text-ink-soft transition-colors">
+                  Next {lang === "he" ? "←" : "→"}
+                </span>
+                <span className="font-serif text-[0.92rem] text-ink group-hover:text-orange transition-colors">
+                  {next.name[locale] || next.name.en}
+                </span>
+              </Link>
+            )}
+          </div>
+        </nav>
+      )}
     </div>
   );
 }
