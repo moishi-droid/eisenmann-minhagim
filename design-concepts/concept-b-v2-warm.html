@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Concept B v2 — Amsterdam Warm</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --white:        #FAF6F0;   /* warm cream-white, not pure white */
+    --surface:      #F3EDE4;   /* card surfaces */
+    --surface-alt:  #EDE5D8;   /* slightly deeper warm surface */
+    --near-black:   #1C1208;   /* warm dark brown-black */
+    --brown-800:    #2E1E0A;   /* rich dark brown for headings */
+    --warm-700:     #4A3520;   /* soft warm brown body text */
+    --warm-500:     #7A6248;   /* muted warm medium */
+    --warm-300:     #B8A48C;   /* warm light text / labels */
+    --warm-200:     #D9CEBC;   /* warm borders */
+    --warm-100:     #EDE5D8;   /* warm hover backgrounds */
+    --orange:       #C94B1A;   /* slightly deeper, richer orange */
+    --orange-light: #E05C28;
+    --orange-pale:  #FBF0E8;   /* warm orange tint for highlights */
+  }
+
+  body {
+    background: var(--white);
+    color: var(--near-black);
+    font-family: 'Inter', -apple-system, sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  /* NAV */
+  nav {
+    border-bottom: 1px solid var(--warm-200);
+    background: var(--white);
+    padding: 0 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  .nav-inner {
+    max-width: 800px;
+    margin: 0 auto;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .nav-brand {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--brown-800);
+    text-decoration: none;
+    letter-spacing: -0.01em;
+  }
+  .nav-brand span {
+    color: var(--orange);
+  }
+  .nav-langs {
+    display: flex;
+    gap: 2px;
+    background: var(--surface);
+    border-radius: 6px;
+    padding: 3px;
+    border: 1px solid var(--warm-200);
+  }
+  .lang-btn {
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 3px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    color: var(--warm-300);
+    background: transparent;
+    letter-spacing: 0.06em;
+    transition: all 0.12s;
+  }
+  .lang-btn.active {
+    background: var(--white);
+    color: var(--brown-800);
+    box-shadow: 0 1px 3px rgba(28,18,8,0.12);
+  }
+
+  /* HERO */
+  .hero {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 5rem 2rem 4rem;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 2rem;
+    align-items: end;
+    border-bottom: 1px solid var(--warm-200);
+  }
+  .hero-left h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    color: var(--brown-800);
+    margin-bottom: 0.8rem;
+  }
+  .hero-left h1 em {
+    color: var(--orange);
+    font-style: normal;
+  }
+  .hero-left p {
+    font-size: 0.95rem;
+    color: var(--warm-700);
+    max-width: 440px;
+    line-height: 1.7;
+  }
+  .hero-right {
+    text-align: right;
+    padding-bottom: 0.5rem;
+  }
+  .hero-stat {
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--warm-200);
+    letter-spacing: -0.04em;
+  }
+  .hero-stat-label {
+    font-size: 0.75rem;
+    color: var(--warm-300);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-top: 0.2rem;
+  }
+
+  /* SECTIONS */
+  .content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 1.25rem;
+  }
+  .section-heading {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--warm-300);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 3rem;
+  }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--warm-200);
+    border-radius: 8px;
+    padding: 1rem 1.25rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    transition: border-color 0.12s, box-shadow 0.12s;
+  }
+  .card:hover {
+    border-color: var(--orange);
+    box-shadow: 0 0 0 3px var(--orange-pale);
+  }
+  .card.has-content {
+    border-left: 3px solid var(--orange);
+    background: var(--white);
+  }
+  .card-name {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--brown-800);
+  }
+  .card-badge {
+    font-size: 0.7rem;
+    color: var(--warm-300);
+  }
+  .card.has-content .card-badge {
+    color: var(--orange);
+    font-weight: 500;
+  }
+
+  /* DETAIL PREVIEW */
+  .detail-preview {
+    border: 1px solid var(--warm-200);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .detail-header {
+    background: var(--brown-800);
+    padding: 2rem 2.5rem;
+    color: white;
+  }
+  .detail-category {
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--orange-light);
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+  }
+  .detail-title {
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.4rem;
+  }
+  .detail-desc {
+    color: rgba(255,255,255,0.5);
+    font-size: 0.85rem;
+  }
+  .detail-body {
+    padding: 1.5rem 2.5rem;
+    background: var(--white);
+  }
+  .custom-card {
+    border: 1px solid var(--warm-200);
+    border-radius: 8px;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 0.75rem;
+    background: var(--surface);
+  }
+  .custom-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+  }
+  .custom-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--brown-800);
+  }
+  .custom-tag {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: var(--orange-pale);
+    color: var(--orange);
+    padding: 2px 7px;
+    border-radius: 4px;
+    border: 1px solid rgba(201,75,26,0.15);
+  }
+  .custom-desc {
+    font-size: 0.85rem;
+    color: var(--warm-700);
+    line-height: 1.7;
+    margin-bottom: 1rem;
+  }
+  .audio-box {
+    background: var(--white);
+    border: 1px solid var(--warm-200);
+    border-radius: 8px;
+    padding: 0.85rem 1rem;
+  }
+  .audio-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.6rem;
+  }
+  .audio-title {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--brown-800);
+  }
+  .audio-sub {
+    font-size: 0.7rem;
+    color: var(--warm-300);
+    margin-top: 1px;
+  }
+  .audio-download {
+    font-size: 0.7rem;
+    color: var(--orange);
+    text-decoration: underline;
+    cursor: pointer;
+    font-weight: 500;
+  }
+  .audio-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+  }
+  .play-btn {
+    width: 30px;
+    height: 30px;
+    background: var(--brown-800);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 9px;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+  .audio-bar {
+    flex: 1;
+    height: 4px;
+    background: var(--warm-200);
+    border-radius: 2px;
+  }
+  .audio-bar-fill {
+    width: 35%;
+    height: 100%;
+    background: var(--orange);
+    border-radius: 2px;
+  }
+  .audio-time {
+    font-size: 0.7rem;
+    color: var(--warm-300);
+    white-space: nowrap;
+  }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--warm-200);
+    padding: 1.5rem 2rem;
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--warm-300);
+  }
+
+  .concept-label {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    background: var(--orange);
+    color: white;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.55rem 1rem;
+    border-radius: 6px;
+    letter-spacing: 0.02em;
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="nav-brand" href="#">Eisenmann <span>Minhagim</span></a>
+    <div class="nav-langs">
+      <button class="lang-btn active">EN</button>
+      <button class="lang-btn">HE</button>
+      <button class="lang-btn">NL</button>
+    </div>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-left">
+    <h1>Family<br><em>Minhagim</em></h1>
+    <p>The unique customs of the Eisenmann family — Yekke Jews from the Netherlands. How we pray, what we sing, and how we mark the moments of Jewish life.</p>
+  </div>
+  <div class="hero-right">
+    <div class="hero-stat">16</div>
+    <div class="hero-stat-label">Occasions</div>
+  </div>
+</div>
+
+<div class="content">
+
+  <div class="section-header">
+    <span class="section-heading">Holidays</span>
+  </div>
+  <div class="grid">
+    <div class="card">
+      <span class="card-name">Shabbat</span>
+      <span class="card-badge">No customs yet</span>
+    </div>
+    <div class="card">
+      <span class="card-name">Rosh Hashana</span>
+      <span class="card-badge">No customs yet</span>
+    </div>
+    <div class="card has-content">
+      <span class="card-name">Yom Kippur</span>
+      <span class="card-badge">3 customs</span>
+    </div>
+    <div class="card has-content">
+      <span class="card-name">Pesach</span>
+      <span class="card-badge">2 customs · 1 tune</span>
+    </div>
+    <div class="card">
+      <span class="card-name">Sukkot</span>
+      <span class="card-badge">No customs yet</span>
+    </div>
+    <div class="card">
+      <span class="card-name">Chanukah</span>
+      <span class="card-badge">No customs yet</span>
+    </div>
+  </div>
+
+  <div class="section-header">
+    <span class="section-heading">Lifecycle Events</span>
+  </div>
+  <div class="grid" style="margin-bottom:3rem">
+    <div class="card has-content">
+      <span class="card-name">Wedding</span>
+      <span class="card-badge">1 custom</span>
+    </div>
+    <div class="card">
+      <span class="card-name">Bar &amp; Bat Mitzvah</span>
+      <span class="card-badge">No customs yet</span>
+    </div>
+  </div>
+
+  <div class="detail-preview">
+    <div class="detail-header">
+      <p class="detail-category">Holiday</p>
+      <h3 class="detail-title">Yom Kippur</h3>
+      <p class="detail-desc">The Day of Atonement, the holiest day of the Jewish year.</p>
+    </div>
+    <div class="detail-body">
+      <div class="custom-card">
+        <div class="custom-header">
+          <div class="custom-title">Kol Nidrei tune</div>
+          <span class="custom-tag">Song</span>
+        </div>
+        <p class="custom-desc">
+          The family uses the distinctive Yekke melody for Kol Nidrei, sung slower than the Ashkenazic norm,
+          with a specific pause before the third repetition.
+        </p>
+        <div class="audio-box">
+          <div class="audio-meta">
+            <div>
+              <div class="audio-title">Kol Nidrei</div>
+              <div class="audio-sub">Recorded by Grandfather Eisenmann · 1987</div>
+            </div>
+            <span class="audio-download">Download</span>
+          </div>
+          <div class="audio-controls">
+            <div class="play-btn">▶</div>
+            <div class="audio-bar"><div class="audio-bar-fill"></div></div>
+            <span class="audio-time">1:24 / 4:02</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  Eisenmann Family Minhagim · Preserving our traditions for generations to come.
+</footer>
+
+<div class="concept-label">Concept B v2 — Amsterdam Warm</div>
+
+</body>
+</html>

@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>B v3c — Letter to Family</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --page:      #FBF8F3;
+    --surface:   #F3EDE4;
+    --surface-2: #EAE2D6;
+    --ink:       #241408;
+    --ink-2:     #523A20;
+    --ink-3:     #907054;
+    --ink-4:     #C4A87C;
+    --rule:      #DDD0B8;
+    --orange:    #BE4418;
+    --orange-mid:#D45020;
+    --orange-pale:#FBF0E8;
+  }
+  body {
+    background: var(--page);
+    color: var(--ink);
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  /* NAV — very thin, unobtrusive */
+  nav {
+    background: var(--page);
+    border-bottom: 1px solid var(--rule);
+    padding: 0 2rem;
+  }
+  .nav-inner {
+    max-width: 720px; margin: 0 auto;
+    height: 48px; display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-brand {
+    font-family: 'Lora', serif;
+    font-size: 0.95rem; color: var(--ink); text-decoration: none;
+  }
+  .nav-langs { display: flex; gap: 1.25rem; }
+  .lang-btn {
+    font-size: 0.72rem; font-weight: 600;
+    border: none; background: none; cursor: pointer;
+    color: var(--ink-4); letter-spacing: 0.07em;
+    padding: 0; transition: color 0.12s;
+  }
+  .lang-btn.active { color: var(--orange); }
+
+  /* HERO — letter / open paragraph style */
+  .hero {
+    max-width: 720px; margin: 0 auto;
+    padding: 5rem 2rem 4rem;
+    border-bottom: 1px solid var(--rule);
+  }
+  .salutation {
+    font-family: 'Lora', serif;
+    font-style: italic;
+    font-size: 1.05rem;
+    color: var(--ink-3);
+    margin-bottom: 1.4rem;
+  }
+  .hero h1 {
+    font-family: 'Lora', serif;
+    font-size: 2.9rem;
+    font-weight: 600;
+    line-height: 1.12;
+    color: var(--ink);
+    margin-bottom: 1.4rem;
+    letter-spacing: -0.01em;
+  }
+  .hero h1 span { color: var(--orange); }
+  .hero p {
+    font-size: 1rem; color: var(--ink-2); line-height: 1.85;
+    max-width: 580px; font-weight: 300;
+    border-left: 2px solid var(--rule);
+    padding-left: 1.25rem;
+  }
+
+  /* CONTENT */
+  .content { max-width: 720px; margin: 0 auto; padding: 0 2rem 4rem; }
+
+  /* Chapter — like a book index */
+  .chapter { margin: 3.5rem 0 1.5rem; }
+  .chapter-num {
+    font-size: 0.65rem; font-weight: 600; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--orange);
+    margin-bottom: 0.3rem;
+  }
+  .chapter-title {
+    font-family: 'Lora', serif;
+    font-size: 1.4rem; font-weight: 500; color: var(--ink);
+  }
+  .chapter-rule { width: 100%; height: 1px; background: var(--rule); margin-top: 0.75rem; }
+
+  /* Cards — list-like, generous */
+  .list { display: flex; flex-direction: column; gap: 6px; }
+  .row {
+    background: var(--surface); border-radius: 8px;
+    padding: 1rem 1.4rem;
+    display: flex; justify-content: space-between; align-items: center;
+    cursor: pointer; transition: background 0.12s, box-shadow 0.12s;
+    border: 1px solid transparent;
+  }
+  .row:hover { background: var(--surface-2); box-shadow: 0 2px 10px rgba(36,20,8,0.07); }
+  .row.filled { background: var(--page); border-color: var(--rule); }
+  .row.filled:hover { border-color: var(--orange); }
+  .row-name {
+    font-family: 'Lora', serif;
+    font-size: 1.05rem; color: var(--ink); font-weight: 400;
+  }
+  .row-right { display: flex; align-items: center; gap: 1rem; }
+  .row-badge { font-size: 0.72rem; color: var(--ink-4); }
+  .row.filled .row-badge { color: var(--orange); font-weight: 600; }
+  .row-arrow { font-size: 0.75rem; color: var(--ink-4); }
+
+  /* Two-col for larger screens */
+  @media (min-width: 580px) {
+    .list { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  }
+
+  /* DETAIL */
+  .detail-wrap { margin-top: 3.5rem; border: 1px solid var(--rule); border-radius: 10px; overflow: hidden; }
+  .detail-top {
+    background: var(--ink); padding: 2.25rem 2.5rem; color: white;
+  }
+  .detail-eyebrow {
+    font-size: 0.63rem; font-weight: 600; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--orange-mid); margin-bottom: 0.5rem;
+  }
+  .detail-title {
+    font-family: 'Lora', serif;
+    font-size: 2.1rem; margin-bottom: 0.4rem; font-weight: 600;
+  }
+  .detail-desc { font-size: 0.87rem; color: rgba(255,255,255,0.42); font-weight: 300; }
+  .detail-body { padding: 2rem 2.5rem; background: var(--page); }
+
+  .custom-block {
+    border-left: 3px solid var(--orange);
+    padding-left: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .custom-head { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 0.4rem; }
+  .custom-name {
+    font-family: 'Lora', serif;
+    font-size: 1.1rem; font-weight: 500; color: var(--ink);
+  }
+  .custom-tag {
+    font-size: 0.62rem; font-weight: 600; letter-spacing: 0.09em; text-transform: uppercase;
+    background: var(--orange-pale); color: var(--orange); padding: 2px 8px; border-radius: 3px;
+  }
+  .custom-body { font-size: 0.88rem; color: var(--ink-2); line-height: 1.78; margin-bottom: 1rem; font-weight: 300; }
+
+  .audio-wrap {
+    background: var(--surface); border: 1px solid var(--rule); border-radius: 8px;
+    padding: 1rem 1.2rem;
+  }
+  .audio-row { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.7rem; }
+  .audio-name { font-size: 0.84rem; font-weight: 500; color: var(--ink); }
+  .audio-by   { font-size: 0.7rem; color: var(--ink-4); margin-top: 2px; font-weight: 300; }
+  .audio-dl   { font-size: 0.7rem; color: var(--orange); text-decoration: underline; cursor: pointer; }
+  .audio-ctrl { display: flex; align-items: center; gap: 0.65rem; }
+  .play {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--orange); color: white;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 9px; cursor: pointer; flex-shrink: 0;
+  }
+  .bar { flex: 1; height: 4px; background: var(--rule); border-radius: 2px; }
+  .bar-fill { width: 35%; height: 100%; background: var(--orange); border-radius: 2px; }
+  .timer { font-size: 0.69rem; color: var(--ink-4); white-space: nowrap; }
+
+  footer {
+    border-top: 1px solid var(--rule); padding: 2rem 2rem 2.5rem;
+    text-align: center;
+  }
+  .footer-sign {
+    font-family: 'Lora', serif; font-style: italic;
+    font-size: 0.9rem; color: var(--ink-3); line-height: 1.9;
+  }
+  .footer-sign strong { color: var(--ink); font-style: normal; }
+
+  .label {
+    position: fixed; bottom: 1.5rem; right: 1.5rem;
+    background: var(--orange); color: white;
+    font-size: 0.72rem; font-weight: 600; padding: 0.5rem 0.9rem;
+    border-radius: 6px; letter-spacing: 0.02em;
+  }
+</style>
+</head>
+<body>
+
+<nav><div class="nav-inner">
+  <a class="nav-brand" href="#">Eisenmann Minhagim</a>
+  <div class="nav-langs">
+    <button class="lang-btn active">EN</button>
+    <button class="lang-btn">HE</button>
+    <button class="lang-btn">NL</button>
+  </div>
+</div></nav>
+
+<div class="hero">
+  <p class="salutation">To our family, wherever you are —</p>
+  <h1>Our <span>Minhagim</span></h1>
+  <p>
+    We are a Yekke family — Jews whose roots trace to the Netherlands and the German-Jewish tradition.
+    This is our living record of the customs unique to us: how we pray, what we sing,
+    and how we mark the moments of Jewish life. It grows with every story we recover.
+  </p>
+</div>
+
+<div class="content">
+
+  <div class="chapter">
+    <p class="chapter-num">Chapter I</p>
+    <h2 class="chapter-title">Holidays</h2>
+    <div class="chapter-rule"></div>
+  </div>
+  <div class="list">
+    <div class="row"><span class="row-name">Shabbat</span><div class="row-right"><span class="row-badge">No customs yet</span><span class="row-arrow">›</span></div></div>
+    <div class="row"><span class="row-name">Rosh Hashana</span><div class="row-right"><span class="row-badge">No customs yet</span><span class="row-arrow">›</span></div></div>
+    <div class="row filled"><span class="row-name">Yom Kippur</span><div class="row-right"><span class="row-badge">3 customs</span><span class="row-arrow">›</span></div></div>
+    <div class="row filled"><span class="row-name">Pesach</span><div class="row-right"><span class="row-badge">2 customs · 1 tune</span><span class="row-arrow">›</span></div></div>
+    <div class="row"><span class="row-name">Sukkot</span><div class="row-right"><span class="row-badge">No customs yet</span><span class="row-arrow">›</span></div></div>
+    <div class="row"><span class="row-name">Chanukah</span><div class="row-right"><span class="row-badge">No customs yet</span><span class="row-arrow">›</span></div></div>
+  </div>
+
+  <div class="chapter">
+    <p class="chapter-num">Chapter II</p>
+    <h2 class="chapter-title">Lifecycle Events</h2>
+    <div class="chapter-rule"></div>
+  </div>
+  <div class="list">
+    <div class="row filled"><span class="row-name">Wedding</span><div class="row-right"><span class="row-badge">1 custom</span><span class="row-arrow">›</span></div></div>
+    <div class="row"><span class="row-name">Bar &amp; Bat Mitzvah</span><div class="row-right"><span class="row-badge">No customs yet</span><span class="row-arrow">›</span></div></div>
+  </div>
+
+  <div class="detail-wrap">
+    <div class="detail-top">
+      <p class="detail-eyebrow">Holiday</p>
+      <h3 class="detail-title">Yom Kippur</h3>
+      <p class="detail-desc">The Day of Atonement, the holiest day of the Jewish year.</p>
+    </div>
+    <div class="detail-body">
+      <div class="custom-block">
+        <div class="custom-head">
+          <div class="custom-name">Kol Nidrei tune</div>
+          <span class="custom-tag">Song</span>
+        </div>
+        <p class="custom-body">The family uses the distinctive Yekke melody for Kol Nidrei, sung slower than the Ashkenazic norm, with a specific pause before the third repetition.</p>
+        <div class="audio-wrap">
+          <div class="audio-row">
+            <div><div class="audio-name">Kol Nidrei</div><div class="audio-by">Recorded by Grandfather Eisenmann · 1987</div></div>
+            <span class="audio-dl">Download</span>
+          </div>
+          <div class="audio-ctrl">
+            <div class="play">▶</div>
+            <div class="bar"><div class="bar-fill"></div></div>
+            <span class="timer">1:24 / 4:02</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p class="footer-sign">
+    With love, <strong>the Eisenmann family</strong><br>
+    Preserving our minhagim for generations to come.
+  </p>
+</footer>
+<div class="label">v3c — Letter to Family</div>
+</body>
+</html>

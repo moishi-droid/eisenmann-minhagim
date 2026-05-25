@@ -1,11 +1,21 @@
 import type { Metadata } from "next";
-import { Geist } from "next/font/google";
+import { Libre_Baskerville, Inter } from "next/font/google";
 import "../globals.css";
 import { hasLocale, type Locale } from "@/lib/dictionaries";
 import { notFound } from "next/navigation";
 import Nav from "@/components/Nav";
 
-const geist = Geist({ subsets: ["latin"], variable: "--font-geist-sans" });
+const baskerville = Libre_Baskerville({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  style: ["normal", "italic"],
+  variable: "--font-baskerville",
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+});
 
 export const metadata: Metadata = {
   title: "Eisenmann Family Minhagim",
@@ -27,12 +37,18 @@ export default async function LocaleLayout({
   const dir = lang === "he" ? "rtl" : "ltr";
 
   return (
-    <html lang={lang} dir={dir} className={`${geist.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col bg-stone-50 text-stone-900">
+    <html
+      lang={lang}
+      dir={dir}
+      className={`${baskerville.variable} ${inter.variable} h-full antialiased`}
+    >
+      <body className="min-h-full flex flex-col bg-cream text-ink">
         <Nav lang={lang as Locale} />
         <main className="flex-1">{children}</main>
-        <footer className="border-t border-stone-200 py-6 text-center text-sm text-stone-400">
-          Eisenmann Family Minhagim · Preserving our traditions for generations to come.
+        <footer className="border-t border-rule py-8 text-center">
+          <p className="font-serif italic text-sm text-ink-light">
+            Preserving the Eisenmann family minhagim for generations to come.
+          </p>
         </footer>
       </body>
     </html>

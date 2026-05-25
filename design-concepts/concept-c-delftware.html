@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Concept C — Delftware</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --delft: #1B3D7A;
+    --delft-dark: #0F2550;
+    --delft-mid: #2E5BA8;
+    --delft-light: #4A78C4;
+    --delft-pale: #E8EEF8;
+    --delft-very-pale: #F2F5FB;
+    --white: #FFFFFF;
+    --cream: #FDFAF4;
+    --gold: #C9A227;
+    --gold-light: #E4BF4A;
+    --text: #0F1B2D;
+    --text-soft: #3A5278;
+    --text-faint: #7A99C4;
+    --border: #C0D0E8;
+  }
+
+  body {
+    background: var(--cream);
+    color: var(--text);
+    font-family: 'Lato', -apple-system, sans-serif;
+    font-size: 15px;
+    line-height: 1.65;
+  }
+
+  /* NAV */
+  nav {
+    background: var(--delft-dark);
+    padding: 0 2rem;
+  }
+  .nav-inner {
+    max-width: 800px;
+    margin: 0 auto;
+    height: 58px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .nav-brand {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--white);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .nav-brand-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--gold);
+    border-radius: 50%;
+  }
+  .nav-langs {
+    display: flex;
+    gap: 6px;
+  }
+  .lang-btn {
+    font-family: 'Lato', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 3px 9px;
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 3px;
+    cursor: pointer;
+    color: rgba(255,255,255,0.6);
+    background: transparent;
+    letter-spacing: 0.07em;
+    transition: all 0.15s;
+  }
+  .lang-btn.active {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: var(--delft-dark);
+  }
+
+  /* HERO BAND */
+  .hero-band {
+    background: var(--delft);
+    padding: 4rem 2rem;
+    /* tile border pattern */
+    border-bottom: 4px solid var(--gold);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-band::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.04) 1px, transparent 0);
+    background-size: 28px 28px;
+  }
+  .hero-inner {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+  }
+  .hero-eyebrow {
+    font-family: 'Lato', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: 1rem;
+    font-weight: 700;
+  }
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3.4rem;
+    font-weight: 600;
+    line-height: 1.15;
+    color: var(--white);
+    margin-bottom: 0.6rem;
+    letter-spacing: 0.01em;
+  }
+  .hero-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.2rem;
+    color: rgba(255,255,255,0.65);
+    margin-bottom: 1.5rem;
+  }
+  .hero-desc {
+    max-width: 520px;
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.75;
+  }
+
+  /* TILE DIVIDER */
+  .tile-divider {
+    height: 12px;
+    background: repeating-linear-gradient(
+      90deg,
+      var(--gold) 0px,
+      var(--gold) 8px,
+      var(--delft-pale) 8px,
+      var(--delft-pale) 16px
+    );
+    opacity: 0.6;
+  }
+
+  /* CONTENT */
+  .content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+  }
+
+  .section-heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--delft);
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--delft-pale);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    letter-spacing: 0.01em;
+  }
+  .section-heading::before {
+    content: '◆';
+    font-size: 0.6rem;
+    color: var(--gold);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 3rem;
+  }
+  .card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1rem 1.25rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    transition: border-color 0.15s, box-shadow 0.15s;
+    border-left: 3px solid transparent;
+  }
+  .card:hover {
+    border-color: var(--delft-light);
+    box-shadow: 0 2px 10px rgba(27,61,122,0.1);
+  }
+  .card.has-content {
+    border-left-color: var(--delft);
+  }
+  .card-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--text);
+    letter-spacing: 0.01em;
+  }
+  .card-badge {
+    font-size: 0.7rem;
+    color: var(--text-faint);
+    font-weight: 400;
+  }
+  .card.has-content .card-badge {
+    color: var(--delft-mid);
+    font-weight: 700;
+  }
+
+  /* DETAIL PREVIEW */
+  .detail-preview {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .detail-header {
+    background: var(--delft-very-pale);
+    border-bottom: 2px solid var(--delft-pale);
+    padding: 1.75rem 2rem;
+  }
+  .detail-category {
+    font-size: 0.65rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--delft-light);
+    margin-bottom: 0.4rem;
+    font-weight: 700;
+  }
+  .detail-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.2rem;
+    font-weight: 600;
+    color: var(--delft-dark);
+    margin-bottom: 0.3rem;
+    letter-spacing: 0.01em;
+  }
+  .detail-desc {
+    color: var(--text-soft);
+    font-size: 0.88rem;
+  }
+  .detail-body {
+    padding: 1.5rem 2rem;
+  }
+  .custom-card {
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1.25rem 1.5rem;
+    background: var(--cream);
+    margin-bottom: 0.75rem;
+    border-left: 3px solid var(--delft-mid);
+  }
+  .custom-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 0.25rem;
+    letter-spacing: 0.01em;
+  }
+  .custom-tag {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: var(--delft-pale);
+    color: var(--delft-mid);
+    padding: 2px 7px;
+    border-radius: 3px;
+    display: inline-block;
+    margin-bottom: 0.6rem;
+  }
+  .custom-desc {
+    font-size: 0.87rem;
+    color: var(--text-soft);
+    line-height: 1.7;
+    margin-bottom: 1rem;
+  }
+  .audio-box {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 0.9rem 1.1rem;
+  }
+  .audio-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 0.7rem;
+  }
+  .audio-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text);
+  }
+  .audio-sub {
+    font-size: 0.72rem;
+    color: var(--text-faint);
+    margin-top: 1px;
+  }
+  .audio-download {
+    font-size: 0.7rem;
+    color: var(--delft-mid);
+    text-decoration: underline;
+    cursor: pointer;
+    font-weight: 700;
+  }
+  .audio-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+  }
+  .play-btn {
+    width: 30px;
+    height: 30px;
+    background: var(--delft);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 9px;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+  .audio-bar {
+    flex: 1;
+    height: 4px;
+    background: var(--delft-pale);
+    border-radius: 2px;
+  }
+  .audio-bar-fill {
+    width: 35%;
+    height: 100%;
+    background: var(--delft-mid);
+    border-radius: 2px;
+  }
+  .audio-time {
+    font-size: 0.7rem;
+    color: var(--text-faint);
+    white-space: nowrap;
+  }
+
+  .concept-label {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    background: var(--delft-dark);
+    color: var(--gold-light);
+    font-family: 'Lato', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.55rem 1rem;
+    border-radius: 3px;
+    letter-spacing: 0.04em;
+    border: 1px solid var(--gold);
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="nav-brand" href="#"><div class="nav-brand-dot"></div>Eisenmann Minhagim</a>
+    <div class="nav-langs">
+      <button class="lang-btn active">EN</button>
+      <button class="lang-btn">HE</button>
+      <button class="lang-btn">NL</button>
+    </div>
+  </div>
+</nav>
+
+<div class="hero-band">
+  <div class="hero-inner">
+    <p class="hero-eyebrow">Eisenmann Family · Est. Netherlands</p>
+    <h1>Family Minhagim</h1>
+    <p class="hero-subtitle">The customs and traditions of our family</p>
+    <p class="hero-desc">
+      We are a Yekke family — Jews whose roots trace to the Netherlands and the German-Jewish tradition.
+      This site preserves the minhagim unique to our family: how we pray, what we sing,
+      and how we mark the moments of Jewish life.
+    </p>
+  </div>
+</div>
+
+<div class="tile-divider"></div>
+
+<div class="content">
+
+  <h2 class="section-heading">Holidays</h2>
+  <div class="grid">
+    <div class="card">
+      <span class="card-name">Shabbat</span>
+      <span class="card-badge">No customs yet</span>
+    </div>
+    <div class="card">
+      <span class="card-name">Rosh Hashana</span>
+      <span class="card-badge">No customs yet</span>
+    </div>
+    <div class="card has-content">
+      <span class="card-name">Yom Kippur</span>
+      <span class="card-badge">3 customs</span>
+    </div>
+    <div class="card has-content">
+      <span class="card-name">Pesach</span>
+      <span class="card-badge">2 customs · 1 tune</span>
+    </div>
+    <div class="card">
+      <span class="card-name">Sukkot</span>
+      <span class="card-badge">No customs yet</span>
+    </div>
+    <div class="card">
+      <span class="card-name">Chanukah</span>
+      <span class="card-badge">No customs yet</span>
+    </div>
+  </div>
+
+  <h2 class="section-heading">Lifecycle Events</h2>
+  <div class="grid" style="margin-bottom:3rem">
+    <div class="card has-content">
+      <span class="card-name">Wedding</span>
+      <span class="card-badge">1 custom</span>
+    </div>
+    <div class="card">
+      <span class="card-name">Bar &amp; Bat Mitzvah</span>
+      <span class="card-badge">No customs yet</span>
+    </div>
+  </div>
+
+  <div class="detail-preview">
+    <div class="detail-header">
+      <p class="detail-category">Holiday</p>
+      <h3 class="detail-title">Yom Kippur</h3>
+      <p class="detail-desc">The Day of Atonement, the holiest day of the Jewish year.</p>
+    </div>
+    <div class="detail-body">
+      <div class="custom-card">
+        <div class="custom-title">Kol Nidrei tune</div>
+        <span class="custom-tag">Song</span>
+        <p class="custom-desc">
+          The family uses the distinctive Yekke melody for Kol Nidrei, sung slower than the Ashkenazic norm,
+          with a specific pause before the third repetition.
+        </p>
+        <div class="audio-box">
+          <div class="audio-meta">
+            <div>
+              <div class="audio-title">Kol Nidrei</div>
+              <div class="audio-sub">Recorded by Grandfather Eisenmann · 1987</div>
+            </div>
+            <span class="audio-download">Download</span>
+          </div>
+          <div class="audio-controls">
+            <div class="play-btn">▶</div>
+            <div class="audio-bar"><div class="audio-bar-fill"></div></div>
+            <span class="audio-time">1:24 / 4:02</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="concept-label">Concept C — Delftware</div>
+
+</body>
+</html>

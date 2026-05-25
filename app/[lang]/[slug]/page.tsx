@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import Link from "next/link";
 import { hasLocale, getDictionary, type Locale } from "@/lib/dictionaries";
 import { getEntry, getAllEntries } from "@/lib/content";
 import AudioPlayer from "@/components/AudioPlayer";
@@ -18,53 +19,80 @@ export default async function EntryPage({ params }: PageProps<"/[lang]/[slug]">)
 
   const locale = lang as Locale;
   const dict = (await getDictionary(locale)) as Record<string, Record<string, string>>;
+  const categoryLabel = entry.category === "holiday" ? dict.nav.holidays : dict.nav.lifecycle;
 
   return (
-    <div className="max-w-2xl mx-auto px-4 py-12">
-      <div className="mb-8">
-        <p className="text-sm text-stone-400 uppercase tracking-widest mb-1">
-          {entry.category === "holiday" ? dict.nav.holidays : dict.nav.lifecycle}
-        </p>
-        <h1 className="text-3xl font-semibold text-stone-900 mb-3">
-          {entry.name[locale]}
-        </h1>
-        {entry.description[locale] && (
-          <p className="text-stone-500 leading-relaxed">{entry.description[locale]}</p>
-        )}
-      </div>
+    <div className="max-w-[680px] mx-auto px-6 py-10">
+      {/* Back link */}
+      <Link
+        href={`/${lang}`}
+        className="inline-flex items-center gap-1.5 text-[0.78rem] text-ink-light hover:text-ink-soft transition-colors mb-8"
+      >
+        <span>←</span>
+        <span>All {categoryLabel}</span>
+      </Link>
 
-      {entry.customs.length === 0 ? (
-        <div className="rounded-lg border border-dashed border-stone-300 p-8 text-center">
-          <p className="font-medium text-stone-500 mb-2">{dict.entry.no_customs_heading}</p>
-          <p className="text-sm text-stone-400">{dict.entry.no_customs_body}</p>
+      {/* Entry header — dark ink band */}
+      <div className="rounded-[12px] overflow-hidden border border-rule shadow-[0_4px_24px_rgba(42,26,8,0.07)] mb-8">
+        <div className="bg-ink px-10 py-9 text-white">
+          <p className="text-[0.65rem] font-semibold tracking-[0.14em] uppercase text-orange mb-2">
+            {categoryLabel}
+          </p>
+          <h1 className="font-serif text-[2.1rem] font-bold mb-2 leading-tight">
+            {entry.name[locale]}
+          </h1>
+          {entry.description[locale] && (
+            <p className="text-white/40 text-[0.87rem] font-light leading-relaxed">
+              {entry.description[locale]}
+            </p>
+          )}
         </div>
-      ) : (
-        <ul className="space-y-6">
-          {entry.customs.map((custom) => (
-            <li key={custom.id} className="rounded-lg border border-stone-200 bg-white p-6">
-              <h2 className="text-lg font-semibold text-stone-800 mb-2">{custom.title}</h2>
-              {custom.category && (
-                <span className="inline-block text-xs bg-stone-100 text-stone-500 rounded px-2 py-0.5 mb-3 capitalize">
-                  {custom.category}
-                </span>
-              )}
-              <p className="text-stone-600 leading-relaxed text-sm">{custom.description}</p>
-              {custom.audio && custom.audio.length > 0 && (
-                <div className="mt-4 space-y-3">
-                  {custom.audio.map((recording) => (
-                    <AudioPlayer
-                      key={recording.id}
-                      recording={recording}
-                      recordedByLabel={dict.entry.recorded_by}
-                      downloadLabel={dict.entry.download}
-                    />
-                  ))}
-                </div>
-              )}
-            </li>
-          ))}
-        </ul>
-      )}
+
+        {/* Customs */}
+        <div className="bg-cream px-10 py-7">
+          {entry.customs.length === 0 ? (
+            <div className="text-center py-8">
+              <p className="font-serif italic text-ink-mid text-[1rem] mb-1">
+                {dict.entry.no_customs_heading}
+              </p>
+              <p className="text-ink-light text-sm">{dict.entry.no_customs_body}</p>
+            </div>
+          ) : (
+            <ul className="space-y-5">
+              {entry.customs.map((custom) => (
+                <li
+                  key={custom.id}
+                  className="bg-surface rounded-[10px] border border-rule px-6 py-5"
+                >
+                  <div className="flex items-start justify-between mb-2">
+                    <h2 className="font-serif text-[1.05rem] text-ink">{custom.title}</h2>
+                    {custom.category && (
+                      <span className="text-[0.63rem] font-semibold tracking-[0.09em] uppercase bg-orange-pale text-orange px-2 py-0.5 rounded-full shrink-0 ml-3">
+                        {custom.category}
+                      </span>
+                    )}
+                  </div>
+                  <p className="text-ink-soft text-[0.86rem] leading-[1.72] mb-4">
+                    {custom.description}
+                  </p>
+                  {custom.audio && custom.audio.length > 0 && (
+                    <div className="space-y-3">
+                      {custom.audio.map((recording) => (
+                        <AudioPlayer
+                          key={recording.id}
+                          recording={recording}
+                          recordedByLabel={dict.entry.recorded_by}
+                          downloadLabel={dict.entry.download}
+                        />
+                      ))}
+                    </div>
+                  )}
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      </div>
     </div>
   );
 }

@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>B v3a — Family Album</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --cream:      #FAF6EF;
+    --surface:    #F2EBE0;
+    --surface-2:  #EAE0D2;
+    --ink:        #2A1A08;
+    --ink-soft:   #56401E;
+    --ink-mid:    #8C7355;
+    --ink-light:  #BBA98C;
+    --rule:       #D8CBAF;
+    --orange:     #C4481A;
+    --orange-pale:#FBF0E7;
+  }
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    line-height: 1.65;
+  }
+
+  /* NAV — unobtrusive */
+  nav {
+    background: var(--cream);
+    border-bottom: 1px solid var(--rule);
+    padding: 0 2rem;
+  }
+  .nav-inner {
+    max-width: 760px;
+    margin: 0 auto;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .nav-brand {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: 1rem;
+    color: var(--ink);
+    text-decoration: none;
+    letter-spacing: 0.01em;
+  }
+  .nav-langs {
+    display: flex;
+    gap: 1rem;
+  }
+  .lang-btn {
+    font-size: 0.75rem;
+    font-weight: 500;
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: var(--ink-light);
+    letter-spacing: 0.06em;
+    padding: 0;
+    transition: color 0.12s;
+  }
+  .lang-btn.active { color: var(--orange); }
+  .lang-btn:hover  { color: var(--ink-soft); }
+
+  /* HERO — centered, welcoming */
+  .hero {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 5.5rem 2rem 4rem;
+    text-align: center;
+  }
+  .hero-script {
+    font-family: 'Libre Baskerville', serif;
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--orange);
+    margin-bottom: 0.9rem;
+    letter-spacing: 0.02em;
+  }
+  .hero h1 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 2.8rem;
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin-bottom: 1.2rem;
+  }
+  .hero-rule {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    margin: 0 auto 1.4rem;
+    color: var(--ink-light);
+    width: 120px;
+  }
+  .hero-rule::before,
+  .hero-rule::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+  }
+  .hero-rule-dot {
+    width: 5px; height: 5px;
+    background: var(--orange);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .hero p {
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+    line-height: 1.8;
+  }
+
+  /* CONTENT */
+  .content {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 1rem 2rem 4rem;
+  }
+
+  /* Section title — chapter style */
+  .chapter {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 3rem 0 1.5rem;
+  }
+  .chapter-title {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1.25rem;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--ink-soft);
+    white-space: nowrap;
+  }
+  .chapter-rule {
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+  }
+
+  /* Cards — warmer, more generous */
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 0.5rem;
+  }
+  .card {
+    background: var(--surface);
+    border-radius: 10px;
+    padding: 1.1rem 1.4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.13s, box-shadow 0.13s;
+    border: 1px solid transparent;
+  }
+  .card:hover {
+    background: var(--surface-2);
+    box-shadow: 0 2px 12px rgba(42,26,8,0.08);
+  }
+  .card.filled {
+    background: var(--cream);
+    border-color: var(--rule);
+    box-shadow: 0 1px 4px rgba(42,26,8,0.06);
+  }
+  .card.filled:hover {
+    border-color: var(--orange);
+    box-shadow: 0 2px 12px rgba(196,72,26,0.12);
+  }
+  .card-name {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 0.97rem;
+    font-weight: 400;
+    color: var(--ink);
+  }
+  .card-badge {
+    font-size: 0.7rem;
+    color: var(--ink-light);
+  }
+  .card.filled .card-badge {
+    color: var(--orange);
+    font-weight: 600;
+  }
+
+  /* Detail card */
+  .detail-wrap {
+    margin-top: 3.5rem;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--rule);
+    box-shadow: 0 4px 24px rgba(42,26,8,0.07);
+  }
+  .detail-top {
+    background: var(--ink);
+    padding: 2.25rem 2.5rem;
+    color: white;
+  }
+  .detail-tag {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 0.5rem;
+  }
+  .detail-title {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 2.1rem;
+    font-weight: 700;
+    margin-bottom: 0.4rem;
+    letter-spacing: -0.01em;
+  }
+  .detail-desc { font-size: 0.88rem; color: rgba(255,255,255,0.45); }
+  .detail-body { padding: 1.75rem 2.5rem; background: var(--cream); }
+
+  .custom-item {
+    background: var(--surface);
+    border-radius: 10px;
+    padding: 1.3rem 1.5rem;
+    border: 1px solid var(--rule);
+  }
+  .custom-top {
+    display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 0.5rem;
+  }
+  .custom-title {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1.05rem;
+    color: var(--ink);
+  }
+  .custom-tag {
+    font-size: 0.63rem; font-weight: 600; letter-spacing: 0.09em; text-transform: uppercase;
+    background: var(--orange-pale); color: var(--orange);
+    padding: 2px 8px; border-radius: 20px;
+  }
+  .custom-desc {
+    font-size: 0.86rem; color: var(--ink-soft); line-height: 1.72; margin-bottom: 1rem;
+  }
+  .audio-wrap {
+    background: var(--cream); border: 1px solid var(--rule); border-radius: 8px; padding: 0.9rem 1.1rem;
+  }
+  .audio-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.65rem; }
+  .audio-name { font-size: 0.82rem; font-weight: 500; color: var(--ink); }
+  .audio-by   { font-size: 0.7rem; color: var(--ink-light); margin-top: 1px; }
+  .audio-dl   { font-size: 0.7rem; color: var(--orange); text-decoration: underline; cursor: pointer; }
+  .audio-ctrl { display: flex; align-items: center; gap: 0.65rem; }
+  .play {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--ink); color: white;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 9px; cursor: pointer; flex-shrink: 0;
+  }
+  .bar { flex: 1; height: 4px; background: var(--rule); border-radius: 2px; }
+  .bar-fill { width: 35%; height: 100%; background: var(--orange); border-radius: 2px; }
+  .timer { font-size: 0.7rem; color: var(--ink-light); white-space: nowrap; }
+
+  footer {
+    border-top: 1px solid var(--rule);
+    padding: 1.5rem 2rem;
+    text-align: center;
+    font-family: 'Libre Baskerville', serif;
+    font-style: italic;
+    font-size: 0.85rem;
+    color: var(--ink-light);
+  }
+
+  .label {
+    position: fixed; bottom: 1.5rem; right: 1.5rem;
+    background: var(--orange); color: white;
+    font-size: 0.72rem; font-weight: 600; padding: 0.5rem 0.9rem;
+    border-radius: 6px; letter-spacing: 0.02em;
+  }
+</style>
+</head>
+<body>
+
+<nav><div class="nav-inner">
+  <a class="nav-brand" href="#">Eisenmann Minhagim</a>
+  <div class="nav-langs">
+    <button class="lang-btn active">EN</button>
+    <button class="lang-btn">HE</button>
+    <button class="lang-btn">NL</button>
+  </div>
+</div></nav>
+
+<div class="hero">
+  <p class="hero-script">The Eisenmann Family</p>
+  <h1>Our Minhagim</h1>
+  <div class="hero-rule"><div class="hero-rule-dot"></div></div>
+  <p>We are a Yekke family — Jews whose roots trace to the Netherlands and the German-Jewish tradition. This is our living record of how we pray, what we sing, and how we mark the moments of Jewish life.</p>
+</div>
+
+<div class="content">
+
+  <div class="chapter"><span class="chapter-title">Holidays</span><div class="chapter-rule"></div></div>
+  <div class="grid">
+    <div class="card"><span class="card-name">Shabbat</span><span class="card-badge">No customs yet</span></div>
+    <div class="card"><span class="card-name">Rosh Hashana</span><span class="card-badge">No customs yet</span></div>
+    <div class="card filled"><span class="card-name">Yom Kippur</span><span class="card-badge">3 customs</span></div>
+    <div class="card filled"><span class="card-name">Pesach</span><span class="card-badge">2 customs · 1 tune</span></div>
+    <div class="card"><span class="card-name">Sukkot</span><span class="card-badge">No customs yet</span></div>
+    <div class="card"><span class="card-name">Chanukah</span><span class="card-badge">No customs yet</span></div>
+  </div>
+
+  <div class="chapter"><span class="chapter-title">Lifecycle Events</span><div class="chapter-rule"></div></div>
+  <div class="grid">
+    <div class="card filled"><span class="card-name">Wedding</span><span class="card-badge">1 custom</span></div>
+    <div class="card"><span class="card-name">Bar &amp; Bat Mitzvah</span><span class="card-badge">No customs yet</span></div>
+  </div>
+
+  <div class="detail-wrap">
+    <div class="detail-top">
+      <p class="detail-tag">Holiday</p>
+      <h3 class="detail-title">Yom Kippur</h3>
+      <p class="detail-desc">The Day of Atonement, the holiest day of the Jewish year.</p>
+    </div>
+    <div class="detail-body">
+      <div class="custom-item">
+        <div class="custom-top">
+          <div class="custom-title">Kol Nidrei tune</div>
+          <span class="custom-tag">Song</span>
+        </div>
+        <p class="custom-desc">The family uses the distinctive Yekke melody for Kol Nidrei, sung slower than the Ashkenazic norm, with a specific pause before the third repetition.</p>
+        <div class="audio-wrap">
+          <div class="audio-row">
+            <div><div class="audio-name">Kol Nidrei</div><div class="audio-by">Recorded by Grandfather Eisenmann · 1987</div></div>
+            <span class="audio-dl">Download</span>
+          </div>
+          <div class="audio-ctrl">
+            <div class="play">▶</div>
+            <div class="bar"><div class="bar-fill"></div></div>
+            <span class="timer">1:24 / 4:02</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>Preserving the Eisenmann family minhagim for generations to come.</footer>
+<div class="label">v3a — Family Album</div>
+</body>
+</html>

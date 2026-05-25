@@ -14,71 +14,87 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
   const locale = lang as Locale;
 
   return (
-    <div className="max-w-3xl mx-auto px-4 py-12">
-      <header className="mb-12 text-center">
-        <h1 className="text-4xl font-semibold tracking-tight text-stone-900 mb-3">
-          {dict.home.title}
+    <div className="max-w-[760px] mx-auto px-6">
+      {/* Hero */}
+      <header className="text-center py-20 border-b border-rule">
+        <p className="font-serif italic text-orange text-[1rem] mb-4">
+          The Eisenmann Family
+        </p>
+        <h1 className="font-serif text-[2.8rem] font-bold leading-[1.15] tracking-[-0.01em] text-ink mb-5">
+          {dict.home.title.replace("Eisenmann Family ", "")}
         </h1>
-        <p className="text-lg text-stone-500 mb-6">{dict.home.subtitle}</p>
-        <p className="text-stone-600 leading-relaxed max-w-xl mx-auto text-sm">
+        {/* decorative dot-rule */}
+        <div className="flex items-center justify-center gap-3 mb-5 mx-auto w-[120px]">
+          <div className="flex-1 h-px bg-rule" />
+          <div className="w-[5px] h-[5px] rounded-full bg-orange shrink-0" />
+          <div className="flex-1 h-px bg-rule" />
+        </div>
+        <p className="text-ink-soft leading-[1.8] text-[0.95rem] max-w-[520px] mx-auto">
           {dict.home.description}
         </p>
       </header>
 
-      <Section
-        heading={dict.home.holidays_heading}
-        entries={holidays}
-        locale={locale}
-        lang={lang}
-        noCustomsLabel={dict.home.no_customs}
-      />
+      {/* Holidays */}
+      <Chapter heading={dict.home.holidays_heading} />
+      <EntryGrid entries={holidays} locale={locale} lang={lang} noCustomsLabel={dict.home.no_customs} />
 
-      <Section
-        heading={dict.home.lifecycle_heading}
-        entries={lifecycle}
-        locale={locale}
-        lang={lang}
-        noCustomsLabel={dict.home.no_customs}
-      />
+      {/* Lifecycle */}
+      <Chapter heading={dict.home.lifecycle_heading} />
+      <EntryGrid entries={lifecycle} locale={locale} lang={lang} noCustomsLabel={dict.home.no_customs} />
+
+      <div className="pb-16" />
     </div>
   );
 }
 
-function Section({
-  heading,
+function Chapter({ heading }: { heading: string }) {
+  return (
+    <div className="flex items-center gap-4 mt-12 mb-5">
+      <h2 className="font-serif italic text-[1.25rem] text-ink-soft whitespace-nowrap">
+        {heading}
+      </h2>
+      <div className="flex-1 h-px bg-rule" />
+    </div>
+  );
+}
+
+function EntryGrid({
   entries,
   locale,
   lang,
   noCustomsLabel,
 }: {
-  heading: string;
   entries: Entry[];
   locale: Locale;
   lang: string;
   noCustomsLabel: string;
 }) {
   return (
-    <section className="mb-12">
-      <h2 className="text-xl font-semibold text-stone-700 mb-4 pb-2 border-b border-stone-200">
-        {heading}
-      </h2>
-      <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-        {entries.map((entry) => (
+    <ul className="grid grid-cols-1 sm:grid-cols-2 gap-[10px]">
+      {entries.map((entry) => {
+        const hasCustums = entry.customs.length > 0;
+        return (
           <li key={entry.id}>
             <Link
               href={`/${lang}/${entry.slug}`}
-              className="flex items-center justify-between p-4 rounded-lg border border-stone-200 bg-white hover:border-stone-400 hover:shadow-sm transition-all"
+              className={`flex items-center justify-between px-[1.4rem] py-[1.1rem] rounded-[10px] border transition-all ${
+                hasCustums
+                  ? "bg-cream border-rule hover:border-orange hover:shadow-[0_2px_12px_rgba(196,72,26,0.12)]"
+                  : "bg-surface border-transparent hover:bg-surface-2 hover:shadow-[0_2px_10px_rgba(42,26,8,0.08)]"
+              }`}
             >
-              <span className="font-medium text-stone-800">{entry.name[locale]}</span>
-              <span className="text-xs text-stone-400">
-                {entry.customs.length === 0
-                  ? noCustomsLabel
-                  : `${entry.customs.length} custom${entry.customs.length !== 1 ? "s" : ""}`}
+              <span className="font-serif text-[0.97rem] text-ink">
+                {entry.name[locale]}
+              </span>
+              <span className={`text-[0.7rem] ${hasCustums ? "text-orange font-semibold" : "text-ink-light"}`}>
+                {hasCustums
+                  ? `${entry.customs.length} custom${entry.customs.length !== 1 ? "s" : ""}`
+                  : noCustomsLabel}
               </span>
             </Link>
           </li>
-        ))}
-      </ul>
-    </section>
+        );
+      })}
+    </ul>
   );
 }

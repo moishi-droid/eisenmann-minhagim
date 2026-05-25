@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Concept A — Parchment</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --parchment: #F4EDD8;
+    --parchment-dark: #E8D9B8;
+    --ink: #2C1F0F;
+    --ink-soft: #5C4A2A;
+    --ink-faint: #9B8060;
+    --gold: #B8892A;
+    --gold-light: #D4A84B;
+    --rule: #C9A96E;
+  }
+
+  body {
+    background: var(--parchment);
+    color: var(--ink);
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 17px;
+    line-height: 1.7;
+    /* subtle paper grain */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  }
+
+  /* NAV */
+  nav {
+    border-bottom: 1px solid var(--rule);
+    background: #EFE3C4;
+    padding: 0 2rem;
+  }
+  .nav-inner {
+    max-width: 780px;
+    margin: 0 auto;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .nav-brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--ink);
+    text-decoration: none;
+    letter-spacing: 0.01em;
+  }
+  .nav-langs {
+    display: flex;
+    gap: 4px;
+  }
+  .lang-btn {
+    font-family: 'EB Garamond', serif;
+    font-size: 0.8rem;
+    padding: 2px 8px;
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+    cursor: pointer;
+    color: var(--ink-faint);
+    background: transparent;
+    letter-spacing: 0.05em;
+    transition: all 0.15s;
+  }
+  .lang-btn.active {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: #fff;
+  }
+
+  /* HERO */
+  .hero {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 4rem 2rem 3rem;
+    text-align: center;
+    border-bottom: 1px solid var(--rule);
+  }
+  .hero-eyebrow {
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8rem;
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--ink);
+    margin-bottom: 0.6rem;
+  }
+  .hero-subtitle {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.15rem;
+    color: var(--ink-soft);
+    margin-bottom: 1.5rem;
+  }
+  .hero-rule {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    justify-content: center;
+    margin: 1.6rem 0;
+  }
+  .hero-rule::before, .hero-rule::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 1px;
+    background: var(--rule);
+  }
+  .hero-rule-diamond {
+    width: 7px;
+    height: 7px;
+    background: var(--gold);
+    transform: rotate(45deg);
+  }
+  .hero-desc {
+    max-width: 520px;
+    margin: 0 auto;
+    color: var(--ink-soft);
+    font-size: 1rem;
+    line-height: 1.8;
+  }
+
+  /* SECTIONS */
+  .content {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+  }
+  .section-heading {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 1.4rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+  .section-heading::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 3rem;
+  }
+  .card {
+    background: #EFE3C4;
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+    padding: 1rem 1.25rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-decoration: none;
+    color: var(--ink);
+    transition: background 0.15s, box-shadow 0.15s;
+    cursor: pointer;
+  }
+  .card:hover {
+    background: #E6D5AA;
+    box-shadow: 0 2px 8px rgba(44,31,15,0.1);
+  }
+  .card-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 500;
+  }
+  .card-badge {
+    font-size: 0.72rem;
+    color: var(--ink-faint);
+    font-style: italic;
+  }
+
+  /* DETAIL PREVIEW */
+  .detail-preview {
+    background: #EFE3C4;
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+    padding: 2rem 2.5rem;
+    margin-top: 1rem;
+  }
+  .detail-category {
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+  }
+  .detail-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.9rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+  .detail-desc {
+    color: var(--ink-soft);
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+  }
+  .custom-card {
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+    padding: 1.25rem 1.5rem;
+    background: var(--parchment);
+    margin-bottom: 0.75rem;
+  }
+  .custom-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+  }
+  .custom-desc {
+    font-size: 0.88rem;
+    color: var(--ink-soft);
+    line-height: 1.6;
+  }
+  .audio-box {
+    margin-top: 1rem;
+    background: #F8F2E4;
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+    padding: 0.75rem 1rem;
+  }
+  .audio-meta {
+    font-size: 0.78rem;
+    color: var(--ink-faint);
+    margin-bottom: 0.4rem;
+    display: flex;
+    justify-content: space-between;
+  }
+  .audio-bar {
+    width: 100%;
+    height: 6px;
+    background: var(--parchment-dark);
+    border-radius: 3px;
+    position: relative;
+    margin: 0.5rem 0;
+  }
+  .audio-bar-fill {
+    width: 35%;
+    height: 100%;
+    background: var(--gold);
+    border-radius: 3px;
+  }
+  .audio-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.75rem;
+    color: var(--ink-soft);
+  }
+  .play-btn {
+    width: 28px;
+    height: 28px;
+    background: var(--gold);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 10px;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  /* LABEL */
+  .concept-label {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    background: var(--ink);
+    color: var(--parchment);
+    font-family: 'Playfair Display', serif;
+    font-size: 0.8rem;
+    padding: 0.6rem 1.1rem;
+    border-radius: 2px;
+    letter-spacing: 0.04em;
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="nav-brand" href="#">Eisenmann Minhagim</a>
+    <div class="nav-langs">
+      <button class="lang-btn active">EN</button>
+      <button class="lang-btn">HE</button>
+      <button class="lang-btn">NL</button>
+    </div>
+  </div>
+</nav>
+
+<div class="hero">
+  <p class="hero-eyebrow">Eisenmann Family</p>
+  <h1>Minhagim</h1>
+  <p class="hero-subtitle">The customs and traditions of our family</p>
+  <div class="hero-rule"><div class="hero-rule-diamond"></div></div>
+  <p class="hero-desc">
+    We are a Yekke family — Jews whose roots trace to the Netherlands and the German-Jewish tradition.
+    This site preserves the minhagim unique to our family: how we pray, what we sing,
+    and how we mark the moments of Jewish life.
+  </p>
+</div>
+
+<div class="content">
+
+  <h2 class="section-heading">Holidays</h2>
+  <div class="grid">
+    <div class="card">
+      <span class="card-name">Shabbat</span>
+      <span class="card-badge">No customs yet</span>
+    </div>
+    <div class="card">
+      <span class="card-name">Rosh Hashana</span>
+      <span class="card-badge">No customs yet</span>
+    </div>
+    <div class="card">
+      <span class="card-name">Yom Kippur</span>
+      <span class="card-badge">3 customs</span>
+    </div>
+    <div class="card">
+      <span class="card-name">Pesach</span>
+      <span class="card-badge">2 customs · 1 tune</span>
+    </div>
+    <div class="card">
+      <span class="card-name">Sukkot</span>
+      <span class="card-badge">No customs yet</span>
+    </div>
+    <div class="card">
+      <span class="card-name">Chanukah</span>
+      <span class="card-badge">No customs yet</span>
+    </div>
+  </div>
+
+  <h2 class="section-heading">Lifecycle Events</h2>
+  <div class="grid">
+    <div class="card">
+      <span class="card-name">Wedding</span>
+      <span class="card-badge">1 custom</span>
+    </div>
+    <div class="card">
+      <span class="card-name">Bar &amp; Bat Mitzvah</span>
+      <span class="card-badge">No customs yet</span>
+    </div>
+  </div>
+
+  <div class="detail-preview">
+    <p class="detail-category">Holiday</p>
+    <h3 class="detail-title">Yom Kippur</h3>
+    <p class="detail-desc">The Day of Atonement, the holiest day of the Jewish year.</p>
+
+    <div class="custom-card">
+      <div class="custom-title">Kol Nidrei tune</div>
+      <span style="display:inline-block;font-size:0.7rem;background:#E8D9B8;color:var(--ink-faint);border-radius:2px;padding:2px 7px;margin:4px 0 8px;letter-spacing:0.04em;">Song</span>
+      <p class="custom-desc">
+        The family uses the distinctive Yekke melody for Kol Nidrei, sung slower than the Ashkenazic norm,
+        with a specific pause before the third repetition.
+      </p>
+      <div class="audio-box">
+        <div class="audio-meta">
+          <span>Kol Nidrei — Recorded by Grandfather Eisenmann · 1987</span>
+          <span style="text-decoration:underline;cursor:pointer;">Download</span>
+        </div>
+        <div class="audio-controls">
+          <div class="play-btn">▶</div>
+          <div style="flex:1">
+            <div class="audio-bar"><div class="audio-bar-fill"></div></div>
+          </div>
+          <span>1:24 / 4:02</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="concept-label">Concept A — Parchment</div>
+
+</body>
+</html>
