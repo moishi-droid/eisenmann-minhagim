@@ -29,12 +29,19 @@ export default function AudioPlayer({
         <a
           href={src}
           download={recording.file}
+          aria-label={`Download ${recording.title}`}
           className="text-[0.7rem] text-orange hover:text-ink-soft underline underline-offset-2 shrink-0 ml-4 transition-colors"
         >
           {downloadLabel}
         </a>
       </div>
-      <audio controls className="w-full h-8" src={src} preload="metadata" />
+      <audio
+        controls
+        className="w-full h-8"
+        src={src}
+        preload="metadata"
+        aria-label={`${recording.title} — recorded by ${recording.recordedBy}${recording.year ? ` in ${recording.year}` : ""}`}
+      />
     </div>
   );
 }

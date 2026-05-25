@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import type { Metadata } from "next";
 import { hasLocale, getDictionary, type Locale } from "@/lib/dictionaries";
 import { getEntry, getAllEntries } from "@/lib/content";
 import AudioPlayer from "@/components/AudioPlayer";
@@ -8,6 +9,27 @@ export async function generateStaticParams() {
   const entries = getAllEntries();
   const langs = ["en", "he", "nl"];
   return langs.flatMap((lang) => entries.map((e) => ({ lang, slug: e.slug })));
+}
+
+export async function generateMetadata({
+  params,
+}: PageProps<"/[lang]/[slug]">): Promise<Metadata> {
+  const { lang, slug } = await params;
+  if (!hasLocale(lang)) return {};
+  const entry = getEntry(slug);
+  if (!entry) return {};
+  const locale = lang as Locale;
+  const name = entry.name[locale] || entry.name.en;
+  const description = entry.description[locale] || entry.description.en;
+  return {
+    title: name,
+    description: description || `Eisenmann family customs for ${name}.`,
+    openGraph: {
+      title: `${name} — Eisenmann Family Minhagim`,
+      description: description || `Eisenmann family customs for ${name}.`,
+      locale: lang,
+    },
+  };
 }
 
 export default async function EntryPage({ params }: PageProps<"/[lang]/[slug]">) {
@@ -20,6 +42,8 @@ export default async function EntryPage({ params }: PageProps<"/[lang]/[slug]">)
   const locale = lang as Locale;
   const dict = (await getDictionary(locale)) as Record<string, Record<string, string>>;
   const categoryLabel = entry.category === "holiday" ? dict.nav.holidays : dict.nav.lifecycle;
+  const name = entry.name[locale] || entry.name.en;
+  const description = entry.description[locale] || entry.description.en;
 
   return (
     <div className="max-w-[680px] mx-auto px-6 py-10">
@@ -27,8 +51,9 @@ export default async function EntryPage({ params }: PageProps<"/[lang]/[slug]">)
       <Link
         href={`/${lang}`}
         className="inline-flex items-center gap-1.5 text-[0.78rem] text-ink-light hover:text-ink-soft transition-colors mb-8"
+        aria-label={`Back to all ${categoryLabel}`}
       >
-        <span>←</span>
+        <span aria-hidden="true">{lang === "he" ? "→" : "←"}</span>
         <span>All {categoryLabel}</span>
       </Link>
 
@@ -39,11 +64,11 @@ export default async function EntryPage({ params }: PageProps<"/[lang]/[slug]">)
             {categoryLabel}
           </p>
           <h1 className="font-serif text-[2.1rem] font-bold mb-2 leading-tight">
-            {entry.name[locale]}
+            {name}
           </h1>
-          {entry.description[locale] && (
+          {description && (
             <p className="text-white/40 text-[0.87rem] font-light leading-relaxed">
-              {entry.description[locale]}
+              {description}
             </p>
           )}
         </div>
@@ -51,14 +76,14 @@ export default async function EntryPage({ params }: PageProps<"/[lang]/[slug]">)
         {/* Customs */}
         <div className="bg-cream px-10 py-7">
           {entry.customs.length === 0 ? (
-            <div className="text-center py-8">
+            <div className="text-center py-8" role="status">
               <p className="font-serif italic text-ink-mid text-[1rem] mb-1">
                 {dict.entry.no_customs_heading}
               </p>
               <p className="text-ink-light text-sm">{dict.entry.no_customs_body}</p>
             </div>
           ) : (
-            <ul className="space-y-5">
+            <ul className="space-y-5" aria-label={`Customs for ${name}`}>
               {entry.customs.map((custom) => (
                 <li
                   key={custom.id}
@@ -67,7 +92,10 @@ export default async function EntryPage({ params }: PageProps<"/[lang]/[slug]">)
                   <div className="flex items-start justify-between mb-2">
                     <h2 className="font-serif text-[1.05rem] text-ink">{custom.title}</h2>
                     {custom.category && (
-                      <span className="text-[0.63rem] font-semibold tracking-[0.09em] uppercase bg-orange-pale text-orange px-2 py-0.5 rounded-full shrink-0 ml-3">
+                      <span
+                        className="text-[0.63rem] font-semibold tracking-[0.09em] uppercase bg-orange-pale text-orange px-2 py-0.5 rounded-full shrink-0 ml-3"
+                        aria-label={`Category: ${custom.category}`}
+                      >
                         {custom.category}
                       </span>
                     )}
@@ -76,7 +104,7 @@ export default async function EntryPage({ params }: PageProps<"/[lang]/[slug]">)
                     {custom.description}
                   </p>
                   {custom.audio && custom.audio.length > 0 && (
-                    <div className="space-y-3">
+                    <div className="space-y-3" aria-label="Audio recordings">
                       {custom.audio.map((recording) => (
                         <AudioPlayer
                           key={recording.id}
